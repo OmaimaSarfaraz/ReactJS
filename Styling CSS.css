@@ -1,0 +1,28 @@
+/*App.css
+Normal CSS File (Traditional Way) */
+.container {
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.heading {
+  color: #007bff;
+  font-size: 2rem;
+}
+
+
+
+/*CSS Modules (Modern & Safer)*/
+.container {
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.heading {
+  color: #007bff;
+  font-size: 2rem;
+}
