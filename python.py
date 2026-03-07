@@ -1,0 +1,8 @@
+print("Hello! World")
+print(35)
+print("hey",5)
+print("Hey","python")
+print(6+9)
+print(9-5)
+print(8*2)
+print(8/2)
