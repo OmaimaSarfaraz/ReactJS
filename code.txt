@@ -1,0 +1,690 @@
+ code of video 3
+
+function App() {
+    var name="ali"
+  return (
+    <div>
+      <h1>Hello react js</h1>
+      <h2>Hello world {name}</h2>
+    </div>
+  );
+}
+
+export default App;
+
+code of video 7:
+
+import { useState } from "react";
+
+function App() {
+ const [text, setText] = useState("");
+
+  function handleChange(a) {
+    setText(a.target.value);
+  }
+
+    function handleClick(){
+      alert("button is clicked");
+    }
+
+function handlesubmit(event){
+event.preventDefault();
+alert("form has been submitted")
+}
+
+  return (
+    <div>
+
+  <input type="text" onChange={handleChange} />
+      <p>Typed value: {text}</p>
+
+
+      <form onSubmit={handlesubmit}>
+        <input type="text"></input>
+        <button type="submit">submit</button>
+        </form> 
+
+    <button onClick={handleClick}>click</button>
+    </div>
+  );
+}
+
+
+export default App;
+
+
+//<button onclick=alert("button is clicked")></button>
+
+code of video 9: 
+
+function App() {
+ const names=["mariyam","omaima","ali"];
+  return (
+    <div>
+{names.map((name,i)=>(
+
+  <p key={i}>{name}</p>
+
+))};
+  
+    </div>
+  );
+}
+
+
+export default App;
+
+
+code of video 11:
+import { useRef } from "react";
+
+function App() {
+const inputref=useRef();
+
+  //const[name,setname]=useState("");
+
+function handleChange(){
+ alert("typed name:"+inputref.current.value)
+}
+  return (
+    <div>
+
+<input 
+type="text"
+
+ref={inputref}
+placeholder="enter your name"
+/>
+<button onClick={handleChange}>showname</button>
+    </div>
+  );
+}
+
+
+export default App;
+
+
+code of vid 13:
+import { useRef ,useState,useEffect} from "react";
+
+function App() {
+
+  const [count,setCount]=useState(0);
+  useEffect(()=>{
+console.log("count changed:",count);
+  },[count])
+  return (
+    <div>
+<p>Count:{count}</p>
+<button onClick={()=>setCount(count+1)}>increase</button>
+    </div>
+  );
+}
+
+
+export default App;
+
+code of vide 15:
+
+example 1:
+import { useRef ,useState,useEffect} from "react";
+
+function App() {
+
+  const ref1=useRef(0)
+  
+  function func(){
+ref1.current.focus();
+  }
+  return (
+    <div>
+<input ref={ref1} type="text" placeholder="type something"/>
+<button onClick={func}>focus input</button>
+    </div>
+  );
+}
+
+
+export default App;
+
+
+example 2:
+import { useRef, useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const renderCount = useRef(0);
+  renderCount.current = renderCount.current + 1;
+
+  return (
+  <div>
+     <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    <p>Component Rendered: {renderCount.current} times</p>
+    </div>
+     );
+  }
+
+export default Counter;
+ code of vide0 17:import { createContext, useContext } from "react";
+const Theme=createContext();
+function App() {
+  return (
+<div>
+<Theme.Provider value="dark">
+<NestedComponent2></NestedComponent2>
+</Theme.Provider>
+</div>
+  );
+}
+function NestedComponent2(){
+  const theme1=useContext(Theme);
+  return<p>current theme:dark</p>
+}
+
+
+export default App;
+code of video 19:
+import { createContext, useContext } from "react";
+
+function App() {
+ const [user, setUser] = useState(null);
+  if (isLoggedIn) {
+ 
+}
+setUser
+
+return (
+<div>
+
+</div>
+  );
+}
+
+
+export default App;
+code of video 21:
+import { Routes, Route, Link } from "react-router-dom";
+
+function App() {
+
+
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>|
+        <Link to="/about">About</Link>
+
+      </nav>
+<Routes>
+  <Route path="/" element={<Home/>}/>
+  <Route path="/about" element={<About/>}/>
+
+</Routes>
+
+
+
+
+    </div>
+  );
+}
+
+function Home(){
+  return <h2>welcome to home page</h2>
+}
+function About(){
+  return <h2>welcome to about page</h2>
+}
+
+export default App;
+
+
+ main.jsx code:
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+code of video 23:
+import { Routes, Route, Link, Outlet } from "react-router-dom";
+
+function App() {
+
+
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>|
+        <Link to="/about">About</Link>
+
+      </nav>
+<Routes>
+  <Route path="/" element={<Home/>}/>
+  <Route path="/about" element={<About/>}>
+  <Route path="team" element={<Team/>}/>
+<Route path="contact" element={<Contact/>}/>
+</Route>
+</Routes>
+
+
+
+
+    </div>
+  );
+}
+
+function Home(){
+  return <h2>welcome to home page</h2>
+}
+function About(){
+  return(<div> 
+    <h2>welcome to about page</h2>
+
+ <Link to="team">Team</Link>|
+        <Link to="contact">Contact</Link>
+      <Outlet/>
+ </div>
+  );
+
+}
+function Team(){
+ return <h2>welcome to team page</h2>
+}
+function Contact(){
+ return <h2>welcome to Contact page</h2>
+}
+export default App;
+ code of video 25:
+import { Routes, Route, Link, Outlet, useActionData, Navigate } from "react-router-dom";
+import { useState } from "react";
+function App() {
+
+const [isLoggedIn,setIsLoggedIn]=useState(false);
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>|
+        <Link to="/dashboard">dashboard</Link>|
+        <Link to="/login">login</Link>|
+
+      </nav>
+<Routes>
+  <Route path="/" element={<Home/>}/>
+  <Route path="/dashboard" element={
+    <ProtectedRoute isLoggedIn={isLoggedIn}>
+      <DashBoard/>
+    </ProtectedRoute>
+  }/>
+  <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
+</Routes>
+
+    </div>
+  );
+}
+function ProtectedRoute({isLoggedIn,children}){
+if(!isLoggedIn){
+  return <Navigate to="/login"/>
+}
+return children;
+}
+function Home(){
+  return <h2>welcome to home page anybody can see</h2>
+}
+function DashBoard(){
+ return <h2>welcome to dashboard page after authentication</h2>
+}
+
+function Login({setIsLoggedIn}){
+function handlelogin(){
+  setIsLoggedIn(true);
+}
+  return(
+    <div>
+<button onClick={handlelogin} >for login</button>
+    </div>
+  );
+}
+
+
+export default App;
+ code of video 27:
+
+import {createStore} from 'redux';
+
+const store=createStore(counterReducer);
+
+function App() {
+ store.dispatch({type:"INCREMENT"});
+     console.log(store.getState());
+  store.dispatch({type:"DECREMENT"});
+     console.log(store.getState());
+
+
+  return (
+    <div>
+    <h1>redux</h1>
+    </div>
+  );
+}
+function counterReducer(state={count:0},action){
+  if (action.type==="INCREMENT"){
+
+    return {count:state.count+1};
+      }
+      if (action.type==="DECREMENT"){
+
+    return {count:state.count-1};
+
+      }
+      return state;
+}
+
+export default App;
+
+code of video 29:
+
+import {createStore,applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+
+const store=createStore(counterReducer,applyMiddleware(thunk));
+
+
+function App() {
+
+ store.dispatch({type:"INCREMENT"});
+     console.log("after instant increment",store.getState());
+
+   store.dispatch(increamentwithAsync());
+       console.log("after 5 secs", store.getState());
+
+
+
+  return (
+    <div>
+    <h1>async redux</h1>
+    </div>
+  );
+}
+function counterReducer(state={count:0},action){
+  if (action.type==="INCREMENT"){
+
+    return {count:state.count+1};
+      }
+      return state;
+}
+ function increamentwithAsync(){
+  return function(dispatch){
+    console.log("this will run in 5 secs");
+    setTimeout(()=>
+    {
+      dispatch({type:"INCREMENT"});
+    },5000);
+  };
+ }
+export default App;
+
+ code of video 31:
+
+import { useReducer } from "react";
+
+
+
+function App() {
+const initialState={count:0};
+const [state,dispatch]=useReducer(counterReducer,initialState);
+
+
+  return (
+    <div>
+    <h1>useReducer</h1>
+    <h2>Count:{state.count}</h2>
+    <button onClick={()=>dispatch({type:"INCREMENT"})}>Increment</button>
+     <button onClick={()=>dispatch({type:"DECREMENT"})}>Decrement</button>
+    </div>
+  );
+}
+function counterReducer(state,action){
+  if (action.type==="INCREMENT"){
+
+    return {count:state.count+1};
+      }
+        if (action.type==="DECREMENT"){
+
+    return {count:state.count-1};
+      }
+      return state;
+}
+
+ 
+export default App;
+
+code of video 35:
+import React from "react";
+import SimpleErrorBoundary from "./SimpleErrorBoundary";
+
+function BuggyButton() {
+  const [count, setCount] = React.useState(0);
+
+  if (count === 3) throw new Error("I crashed!"); 
+
+  return <button onClick={() => setCount(count + 1)}>Click: {count}</button>;
+}
+
+function App() {
+  return (
+    <div>
+      <h1>My App</h1>
+      <SimpleErrorBoundary>
+        <BuggyButton />
+      </SimpleErrorBoundary>
+    </div>
+  );
+}
+
+export default App;
+
+import React from "react";
+import SimpleErrorBoundary from "./SimpleErrorBoundary";
+
+function BuggyButton() {
+  const [count, setCount] = React.useState(0);
+
+  if (count === 3) throw new Error("I crashed!"); 
+
+  return <button onClick={() => setCount(count + 1)}>Click: {count}</button>;
+}
+
+function App() {
+  return (
+    <div>
+      <h1>My App</h1>
+      <SimpleErrorBoundary>
+        <BuggyButton />
+      </SimpleErrorBoundary>
+    </div>
+  );
+}
+
+export default App;
+ code of video 37:
+import axios from "axios";
+import { useEffect } from "react";
+
+function App() {
+
+  async function fetchUsers() {
+    try {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      console.log("Fetched users:", response.data);
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+    }
+  }
+
+  async function createUser(userData) {
+    try {
+      const response = await axios.post(
+        "https://jsonplaceholder.typicode.com/users",
+        userData,
+        {
+          headers: { "Content-Type": "application/json" },
+        timeout: 5000,
+        }
+      );
+      console.log("User created (fake API response):", response.data);
+    } catch (error) {
+      if (error.response) {
+        console.error(
+          "Server error:",
+          error.response.status,
+          error.response.data
+        );
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error in setup:", error.message);
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchUsers();
+    createUser({ name: "Mariyam", email: "mariyam@example.com" });
+  }, []);
+
+  return <h1>Check the console for API results!</h1>;
+}
+
+export default App;
+
+ code of video 39:
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+const fetchUsers = async () => {
+  const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+return response.data;
+};
+
+function App() {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["users"],//unique id /key
+      queryFn: fetchUsers,
+  });
+
+  if (isLoading) {
+       console.log("Data is being fetched...");
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    console.log("An error occurred:", error.message);
+      return <p>Error: {error.message}</p>;
+  }
+
+  console.log("Fetched users:", data);
+
+  return (
+  <div>
+      <h1>Users fetched from API:</h1>
+      {data.map((user) => (
+          <p key={user.id}>{user.name}</p>
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+code of video 41:
+
+//before batching
+setA(1);
+setB(2); //rerendered twice
+
+//after batching
+setA(1);
+setB(2);//rerendered once ,batched state updates of one event loop turn
+
+Code of video 43:
+
+// App.jsx
+import React, { useState, useTransition } from "react";
+
+export default function Search() {
+  const [input, setInput] = useState("");
+  const [results, setResults] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  const bigList = Array.from({ length: 5000 }, (_, i) => `Item ${i}`);//item 0
+
+  function handleChange(e) {
+    const value = e.target.value;
+    setInput(value);
+
+    startTransition(() => {
+      const filtered = bigList.filter((item) =>
+        item.toLowerCase().includes(value.toLowerCase())//item 0 includes 0
+      );
+      setResults(filtered);
+    });
+  }
+
+  return (
+    <div>
+      <input value={input} onChange={handleChange} placeholder="Type to filter" />
+      {isPending && <p>Loading...</p>}
+      {results.map((r) => (
+        <p key={r}>{r}</p>
+      ))}
+    </div>
+  );
+}
+ code of video 45:
+
+// App.jsx
+import React, { useState, Suspense } from "react";
+const Blogs=React.lazy(() => import("./Blogs"));
+export default function App() {
+ const [show,setShow]=useState(false);
+
+  return (
+    <div>
+   <button onClick={()=>setShow(true)}>open blogs</button>
+ {show&&
+ <Suspense fallback={<p>loading....</p>}>
+   <Blogs/>
+  </Suspense>
+  }
+    </div>
+  );
+  }
+export default function blogs(){
+    return <h1>welcome to blogs</h1>
+}
+code of video 49:
+import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom'; 
+import App from "./App";
+
+test("shows message after button click", () => {
+
+  render(<App />);
+
+  const btn = screen.getByText("Show Message");
+
+  fireEvent.click(btn);
+
+  const message = screen.getByText("Hello User!");
+  expect(message).toBeInTheDocument();
+});
+
